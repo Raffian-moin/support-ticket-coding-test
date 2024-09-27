@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\SupportTicket;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Mail\SupportTicketAdminEmail;
+use Illuminate\Support\Facades\Mail;
 
 class SupportTicketController extends Controller
 {
@@ -36,8 +38,10 @@ class SupportTicketController extends Controller
             $inputs['created_by'] = auth()->user()->id;
 
             DB::beginTransaction();
-            SupportTicket::create($inputs);
+            $supportTicket = SupportTicket::create($inputs);
             DB::commit();
+
+            Mail::to('admin@mail.com')->send(new SupportTicketAdminEmail(auth()->user()->name, $supportTicket));
 
             return redirect()->back()->with('success', 'Support Ticket Opened Successfully!');
 
