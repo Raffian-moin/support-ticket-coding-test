@@ -25,6 +25,7 @@ Route::middleware(['auth', 'customer', 'verified'])->group(function () {
         Route::get('/dashboard', [SupportTicketController::class, 'index'])->name('customer.dashboard');
         Route::get('/add-support-ticket', [SupportTicketController::class, 'create'])->name('customer.add.support.ticket');
         Route::post('/store-support-ticket', [SupportTicketController::class, 'store'])->name('customer.store.support.ticket');
+        Route::get('/show-support-ticket/{id}', [SupportTicketController::class, 'show'])->name('customer.show.support.ticket');
     });
 });
 

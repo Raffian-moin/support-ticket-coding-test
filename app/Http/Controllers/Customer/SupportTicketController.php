@@ -47,4 +47,10 @@ class SupportTicketController extends Controller
         }
 
     }
+
+    public function show($ticketId)
+    {
+        $supportTicket = SupportTicket::where('id', $ticketId)->first();
+        return view('customer.support-ticket.show', ['supportTicket' => $supportTicket]);
+    }
 }

@@ -21,6 +21,7 @@
                                     <th scope="col" class="px-4 py-2">Title</th>
                                     <th scope="col" class="px-4 py-2">Description</th>
                                     <th scope="col" class="px-4 py-2">Status</th>
+                                    <th scope="col" class="px-4 py-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,6 +31,9 @@
                                         <td class="px-4 py-2">{{ $ticket->subject }}</td>
                                         <td class="px-4 py-2">{{ $ticket->description }}</td>
                                         <td class="px-4 py-2">{{ strtolower($ticket->status) }}</td>
+                                        <td class="px-4 py-2">
+                                            <a class="btn btn-sm btn-info" href="{{ route('customer.show.support.ticket', $ticket->id) }}" role="button">View</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
