@@ -33,9 +33,10 @@ Route::middleware(['auth', 'customer', 'verified'])->group(function () {
 Route::middleware(['auth', 'admin', 'verified'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminSupportTicketController::class, 'index'])->name('admin.dashboard');
-        Route::get('/show-support-ticket', [AdminSupportTicketController::class, 'show'])->name('admin.show.support.ticket');
-        Route::get('/resolve-support-ticket', [AdminSupportTicketController::class, 'resolve'])->name('admin.resolve.support.ticket');
-        Route::get('/delete-support-ticket', [AdminSupportTicketController::class, 'delete'])->name('admin.delete.support.ticket');
+        Route::get('/show-support-ticket/{id}', [AdminSupportTicketController::class, 'show'])->name('admin.show.support.ticket');
+        Route::get('/edit-support-ticket/{id}', [AdminSupportTicketController::class, 'edit'])->name('admin.edit.support.ticket');
+        Route::put('/update-support-ticket/{id}', [AdminSupportTicketController::class, 'update'])->name('admin.update.support.ticket');
+        // Route::get('/delete-support-ticket', [AdminSupportTicketController::class, 'delete'])->name('admin.delete.support.ticket');
         Route::get('/user/add', function () {
             return view('add-user');
         })->name('add.user');

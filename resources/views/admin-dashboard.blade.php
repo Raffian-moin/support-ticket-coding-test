@@ -19,7 +19,7 @@
                                     <th scope="col" class="px-4 py-2">Description</th>
                                     <th scope="col" class="px-4 py-2">Ticket Opened by</th>
                                     <th scope="col" class="px-4 py-2">Status</th>
-                                    <th scope="col" class="px-4 py-2">Action</th>
+                                    <th scope="col" class="px-4 py-2">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,9 +31,11 @@
                                         <td class="px-4 py-2">{{ strtolower($ticket->user->name) }}</td>
                                         <td class="px-4 py-2">{{ strtolower($ticket->status) }}</td>
                                         <td class="px-4 py-2">
-                                            <button class="btn btn-sm btn-primary">View</button>
-                                            <button class="btn btn-sm btn-danger">Edit</button>
-                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                            <a class="btn btn-sm btn-info" href="{{ route('admin.show.support.ticket', $ticket->id) }}" role="button">View</a>
+                                            @if ($ticket->status !== "CLOSED")
+                                                <a class="btn btn-sm btn-primary" href="{{ route('admin.edit.support.ticket', $ticket->id) }}" role="button">Update Status</a>
+                                            @endif
+                                            {{-- <button class="btn btn-sm btn-danger">Delete</button> --}}
                                         </td>
                                     </tr>
                                 @endforeach
