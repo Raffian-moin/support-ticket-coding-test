@@ -32,8 +32,6 @@
                                         <td class="px-4 py-2">{{ strtolower($ticket->status) }}</td>
                                     </tr>
                                 @endforeach
-
-                                <!-- Add more rows as needed -->
                             </tbody>
                         </table>
                     </div>

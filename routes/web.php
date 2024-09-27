@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Customer\SupportTicketController;
+use App\Http\Controllers\Admin\SupportTicketController as AdminSupportTicketController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,17 +30,16 @@ Route::middleware(['auth', 'customer', 'verified'])->group(function () {
 
 
 Route::middleware(['auth', 'admin', 'verified'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin-dashboard');
-    })->middleware(['auth', 'admin', 'verified'])->name('admin.dashboard');
-
-    Route::get('/user/add', function () {
-        return view('add-user');
-    })->middleware(['auth', 'admin', 'verified'])->name('add.user');
+    Route::prefix('admin')->group(function () {
+        Route::get('/dashboard', [AdminSupportTicketController::class, 'index'])->name('admin.dashboard');
+        Route::get('/show-support-ticket', [AdminSupportTicketController::class, 'show'])->name('admin.show.support.ticket');
+        Route::get('/resolve-support-ticket', [AdminSupportTicketController::class, 'resolve'])->name('admin.resolve.support.ticket');
+        Route::get('/delete-support-ticket', [AdminSupportTicketController::class, 'delete'])->name('admin.delete.support.ticket');
+        Route::get('/user/add', function () {
+            return view('add-user');
+        })->name('add.user');
+    });
 });
-
-
-
 
 
 Route::middleware('auth')->group(function () {

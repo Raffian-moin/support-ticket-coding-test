@@ -17,22 +17,26 @@
                                     <th scope="col" class="px-4 py-2">SL</th>
                                     <th scope="col" class="px-4 py-2">Title</th>
                                     <th scope="col" class="px-4 py-2">Description</th>
+                                    <th scope="col" class="px-4 py-2">Ticket Opened by</th>
                                     <th scope="col" class="px-4 py-2">Status</th>
                                     <th scope="col" class="px-4 py-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="px-4 py-2">1</td>
-                                    <td class="px-4 py-2">ABC</td>
-                                    <td class="px-4 py-2">Description</td>
-                                    <td class="px-4 py-2">Closed</td>
-                                    <td class="px-4 py-2">
-                                        <button class="btn btn-sm btn-primary">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <!-- Add more rows as needed -->
+                                @foreach ($supportTickets as $key => $ticket)
+                                    <tr>
+                                        <td class="px-4 py-2">{{ $key + 1 }}</td>
+                                        <td class="px-4 py-2">{{ $ticket->subject }}</td>
+                                        <td class="px-4 py-2">{{ $ticket->description }}</td>
+                                        <td class="px-4 py-2">{{ strtolower($ticket->user->name) }}</td>
+                                        <td class="px-4 py-2">{{ strtolower($ticket->status) }}</td>
+                                        <td class="px-4 py-2">
+                                            <button class="btn btn-sm btn-primary">View</button>
+                                            <button class="btn btn-sm btn-danger">Edit</button>
+                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
