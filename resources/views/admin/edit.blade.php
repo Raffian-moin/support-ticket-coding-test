@@ -39,11 +39,8 @@
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
-                                <select name="status" required class="form-select" aria-label="Default select example">
-                                    <option value="">Select a Status</option>
-                                    <option value="CLOSED">Close</option>
-                                    <option value="IN_PROGRESS">In Progress</option>
-                                </select>
+                                <label for="reply" class="form-label">Reply</label>
+                                <textarea required class="form-control" id="reply" name="reply" rows="4" placeholder="Describe your reply"></textarea>
                             </div>
                             <button type="submit" class="btn btn-success">Update Ticket Status</button>
                         </form>

@@ -19,6 +19,7 @@
 <body>
     <div class="email-container text-center">
         <h1>Issue: {{ $supportTicket->subject }}</h1>
+        <p>Remarks: {{ $supportTicket->reply }}</p>
         <p>
             <a href="{{ route('customer.show.support.ticket', $supportTicket->id) }}" class="btn btn-primary">Go to the ticket</a>
         </p>

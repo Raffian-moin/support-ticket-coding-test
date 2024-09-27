@@ -37,6 +37,7 @@ class SupportTicketController extends Controller
         try {
             $inputs = $request->except(['_token', '_method']);
             $inputs['resolved_by'] = auth()->user()->id;
+            $inputs['status'] = "CLOSED";
 
             DB::beginTransaction();
 
@@ -45,13 +46,10 @@ class SupportTicketController extends Controller
 
             DB::commit();
 
+            $supportTicket = SupportTicket::where('id', $ticketId)->first();
+            Mail::to(auth()->user()->email)->send(new SupportTicketCustomerEmail($supportTicket));
 
-            if ($inputs['status'] === "CLOSED") {
-                $supportTicket = SupportTicket::where('id', $ticketId)->first();
-                Mail::to(auth()->user()->email)->send(new SupportTicketCustomerEmail($supportTicket));
-            }
-
-            return redirect()->back()->with('success', 'Support Ticket Updated Successfully!');
+            return redirect()->route('admin.dashboard')->with('success', 'Support Ticket Updated Successfully!');
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('error', "Couldn't Update Support Ticket");
